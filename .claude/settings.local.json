@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dotnet restore:*)",
+      "Bash(dotnet build:*)",
+      "Bash(find 'C:/Users/panka/CLAUDE-REPOS/Project Index Manager/ProjectIndex.App/obj' -name *.csproj.nuget.dgspec.json -exec cat {})",
+      "Bash(2)",
+      "Bash(dotnet run:*)",
+      "Bash(echo \"EXIT CODE: $?\")",
+      "Bash(dotnet --version)",
+      "Bash(ls ProjectIndex.App/bin/Debug/net8.0-windows10.0.19041.0/*.exe)",
+      "Bash(./ProjectIndex.App/bin/Debug/net8.0-windows10.0.19041.0/ProjectIndex.App.exe)",
+      "Bash(powershell -Command \"Get-WinEvent -LogName Application -MaxEvents 5 | Where-Object { $_TimeCreated -gt \\(Get-Date\\).AddMinutes\\(-5\\) } | Format-List TimeCreated,Message\")",
+      "Bash(powershell -Command \"Get-WinEvent -LogName Application -MaxEvents 10 | Where-Object { $_TimeCreated -gt \\(Get-Date\\).AddMinutes\\(-5\\) } | Select-Object TimeCreated,Id,LevelDisplayName,Message | Format-List\")",
+      "Bash(powershell -Command \"Get-AppxPackage *WindowsAppRuntime*\")",
+      "Bash(dotnet list:*)"
+    ]
+  }
+}

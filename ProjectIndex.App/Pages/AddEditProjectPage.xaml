@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="ProjectIndex.App.Pages.AddEditProjectPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="{Binding PageTitle}"
+             BackgroundColor="{AppThemeBinding Light=#F5F5F3, Dark=#1A1A1A}">
+
+    <ContentPage.Resources>
+        <Color x:Key="AccentBlue">#378ADD</Color>
+        <Color x:Key="MutedText">#888780</Color>
+        <Color x:Key="DangerRed">#E24B4A</Color>
+
+        <Style x:Key="FieldLabel" TargetType="Label">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="TextColor" Value="{StaticResource MutedText}" />
+            <Setter Property="Margin" Value="0,0,0,4" />
+        </Style>
+
+        <Style x:Key="FieldEntry" TargetType="Entry">
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=#252525}" />
+            <Setter Property="TextColor" Value="{AppThemeBinding Light=#2C2C2A, Dark=#F1EFE8}" />
+            <Setter Property="PlaceholderColor" Value="{StaticResource MutedText}" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="HeightRequest" Value="44" />
+            <Setter Property="Margin" Value="0,0,0,14" />
+        </Style>
+
+        <Style x:Key="FieldEditor" TargetType="Editor">
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=#252525}" />
+            <Setter Property="TextColor" Value="{AppThemeBinding Light=#2C2C2A, Dark=#F1EFE8}" />
+            <Setter Property="PlaceholderColor" Value="{StaticResource MutedText}" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="HeightRequest" Value="90" />
+            <Setter Property="Margin" Value="0,0,0,14" />
+        </Style>
+
+        <Style x:Key="FieldPicker" TargetType="Picker">
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=#252525}" />
+            <Setter Property="TextColor" Value="{AppThemeBinding Light=#2C2C2A, Dark=#F1EFE8}" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="HeightRequest" Value="44" />
+            <Setter Property="Margin" Value="0,0,0,14" />
+        </Style>
+
+        <Style x:Key="SectionDivider" TargetType="BoxView">
+            <Setter Property="HeightRequest" Value="0.5" />
+            <Setter Property="Color" Value="{AppThemeBinding Light=#D3D1C7, Dark=#444441}" />
+            <Setter Property="Margin" Value="0,4,0,16" />
+        </Style>
+
+        <Style x:Key="SectionHeader" TargetType="Label">
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="TextColor" Value="{StaticResource MutedText}" />
+            <Setter Property="CharacterSpacing" Value="1" />
+            <Setter Property="Margin" Value="0,0,0,10" />
+        </Style>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <Grid RowDefinitions="*,Auto" Padding="16,12">
+
+            <VerticalStackLayout Grid.Row="0">
+
+                <!-- Section: Core Info -->
+                <Label Text="PROJECT INFO" Style="{StaticResource SectionHeader}" />
+
+                <Label Text="Name *" Style="{StaticResource FieldLabel}" />
+                <Entry x:Name="NameEntry"
+                       Placeholder="e.g. Dark Factory Portal"
+                       Style="{StaticResource FieldEntry}"
+                       ReturnType="Next" />
+
+                <Label Text="Description" Style="{StaticResource FieldLabel}" />
+                <Editor x:Name="DescriptionEditor"
+                        Placeholder="What does this project do?"
+                        Style="{StaticResource FieldEditor}" />
+
+                <BoxView Style="{StaticResource SectionDivider}" />
+
+                <!-- Section: Classification -->
+                <Label Text="CLASSIFICATION" Style="{StaticResource SectionHeader}" />
+
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                    <VerticalStackLayout Grid.Column="0">
+                        <Label Text="Status" Style="{StaticResource FieldLabel}" />
+                        <Picker x:Name="StatusPicker"
+                                Style="{StaticResource FieldPicker}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Grid.Column="1">
+                        <Label Text="Category" Style="{StaticResource FieldLabel}" />
+                        <Entry x:Name="CategoryEntry"
+                               Placeholder="Client / Internal / SaaS"
+                               Style="{StaticResource FieldEntry}" />
+                    </VerticalStackLayout>
+                </Grid>
+
+                <Label Text="Tags  (comma separated)" Style="{StaticResource FieldLabel}" />
+                <Entry x:Name="TagsEntry"
+                       Placeholder=".NET, Azure, MAUI, AI"
+                       Style="{StaticResource FieldEntry}" />
+
+                <BoxView Style="{StaticResource SectionDivider}" />
+
+                <!-- Section: Location -->
+                <Label Text="LOCATION" Style="{StaticResource SectionHeader}" />
+
+                <Label Text="Path / URL" Style="{StaticResource FieldLabel}" />
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                    <Entry x:Name="PathEntry"
+                           Grid.Column="0"
+                           Placeholder="C:\Projects\myapp  or  https://..."
+                           Style="{StaticResource FieldEntry}"
+                           Keyboard="Url" />
+                    <Button Grid.Column="1"
+                            Text="Browse"
+                            Clicked="OnBrowseClicked"
+                            BackgroundColor="{AppThemeBinding Light=#EBEBEB, Dark=#2C2C2A}"
+                            TextColor="{AppThemeBinding Light=#2C2C2A, Dark=#F1EFE8}"
+                            CornerRadius="8"
+                            FontSize="13"
+                            HeightRequest="44"
+                            Margin="0,0,0,14" />
+                </Grid>
+
+                <Label Text="Repository URL" Style="{StaticResource FieldLabel}" />
+                <Entry x:Name="RepoEntry"
+                       Placeholder="https://github.com/..."
+                       Style="{StaticResource FieldEntry}"
+                       Keyboard="Url" />
+
+                <BoxView Style="{StaticResource SectionDivider}" />
+
+                <!-- Section: Notes -->
+                <Label Text="NOTES" Style="{StaticResource SectionHeader}" />
+                <Editor x:Name="NotesEditor"
+                        Placeholder="Anything worth remembering about this project..."
+                        Style="{StaticResource FieldEditor}"
+                        HeightRequest="110" />
+
+                <!-- Validation error -->
+                <Label x:Name="ValidationLabel"
+                       Text=""
+                       FontSize="13"
+                       TextColor="{StaticResource DangerRed}"
+                       IsVisible="False"
+                       Margin="0,0,0,8" />
+
+            </VerticalStackLayout>
+
+            <!-- Footer Buttons -->
+            <Grid Grid.Row="1"
+                  ColumnDefinitions="*,*"
+                  ColumnSpacing="10"
+                  Margin="0,12,0,8">
+                <Button Grid.Column="0"
+                        Text="Cancel"
+                        Clicked="OnCancelClicked"
+                        BackgroundColor="{AppThemeBinding Light=#EBEBEB, Dark=#2C2C2A}"
+                        TextColor="{AppThemeBinding Light=#2C2C2A, Dark=#F1EFE8}"
+                        CornerRadius="10"
+                        HeightRequest="48"
+                        FontAttributes="Bold" />
+                <Button Grid.Column="1"
+                        Text="Save Project"
+                        Clicked="OnSaveClicked"
+                        BackgroundColor="{StaticResource AccentBlue}"
+                        TextColor="White"
+                        CornerRadius="10"
+                        HeightRequest="48"
+                        FontAttributes="Bold" />
+            </Grid>
+
+        </Grid>
+    </ScrollView>
+</ContentPage>
