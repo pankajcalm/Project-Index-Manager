@@ -33,3 +33,6 @@ bld/
 ## OS
 Thumbs.db
 .DS_Store
+
+## Backups
+*.zip

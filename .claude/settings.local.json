@@ -13,7 +13,8 @@
       "Bash(powershell -Command \"Get-WinEvent -LogName Application -MaxEvents 5 | Where-Object { $_TimeCreated -gt \\(Get-Date\\).AddMinutes\\(-5\\) } | Format-List TimeCreated,Message\")",
       "Bash(powershell -Command \"Get-WinEvent -LogName Application -MaxEvents 10 | Where-Object { $_TimeCreated -gt \\(Get-Date\\).AddMinutes\\(-5\\) } | Select-Object TimeCreated,Id,LevelDisplayName,Message | Format-List\")",
       "Bash(powershell -Command \"Get-AppxPackage *WindowsAppRuntime*\")",
-      "Bash(dotnet list:*)"
+      "Bash(dotnet list:*)",
+      "Bash(gh auth:*)"
     ]
   }
 }
